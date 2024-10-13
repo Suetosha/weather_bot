@@ -13,12 +13,8 @@ class Weather:
         self.date = date
 
     def filter_by_day(self, weather_list: list) -> list:
-        weather_filtered_list = list(
-            filter(lambda i:
-                   datetime.strptime(i['dt_txt'], '%Y-%m-%d %H:%M:%S').hour == 15 and
-                   self.date.__str__() in i['dt_txt'], weather_list))
-
-        return weather_filtered_list
+        weather_filtered_list = list(filter(lambda i: self.date.__str__() in i['dt_txt'], weather_list))
+        return weather_filtered_list[0]
 
     def get_weather_info(self):
         url = (f'http://api.openweathermap.org/data/2.5/forecast?q={self.city}&appid={getenv("API_KEY")}&'
